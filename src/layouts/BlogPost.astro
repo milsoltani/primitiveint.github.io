@@ -7,67 +7,74 @@ import FormattedDate from '../components/FormattedDate.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
 		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
+			.blog-index {
+				background: white;
+				box-shadow: 0 2px 8px rgba(var(--black), 5%);
 			}
-			.prose {
+			.blog-index a {
+				text-decoration: none;
+			}
+			.index-section {
 				width: 720px;
 				max-width: calc(100% - 2em);
 				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
+				padding: 3em 1em;
 			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
+			.post-meta {
+				color: #999;
+				display: flex;
+				justify-content: space-between;
 			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
+			.post-description {
+				text-align: start;
 			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
+			.post-title {
+				font-size: 2em;
+				font-weight: bold;
 			}
 		</style>
 	</head>
 
 	<body>
 		<Header />
-		<main>
-			<article>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
+
+			<div class="single-page">
+				<div class="index-section">
+					<h1 class="post-title">{title}</h1>
+
+					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
+
+					<p class="post-description">
+						{description}
+					</p>
+
+					<p class="post-meta">
+						<FormattedDate date={pubDate} />
+						{
+							updatedDate && (
+								<div class="last-updated-on">
+									Last updated on <FormattedDate date={updatedDate} />
+								</div>
+							)
+						}
+					</p>
 				</div>
-			</article>
-		</main>
+			</div>
+
+			<div class="blog-index">
+				<section class="index-section">
+							<article class="index-post">
+								<slot />
+							</article>
+				</section>
+			</div>
 		<Footer />
 	</body>
 </html>

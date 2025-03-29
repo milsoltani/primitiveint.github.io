@@ -11,14 +11,22 @@ const posts = (await getCollection('blog')).sort(
   <section class="index-section">
     {
       posts.map((post) => (
-        <article class="index-posts">
-          <p class="post-date">
-            <FormattedDate date={post.data.pubDate} />
+        <article class="index-post">
+          <a href={`/blog/${post.id}/`}>
+            <h4 class="post-title">{post.data.title}</h4>
+          </a>
+
+          {!!post.data.heroImage && <img width={720} height={260} src={post.data.heroImage} alt="" />}
+
+          <p class="post-description">
+            {post.data.description}
           </p>
 
-          <a href={`/blog/${post.id}/`}>
-            <h5 class="post-title">{post.data.title}</h5>
-          </a>
+          <p class="post-meta">
+            <a href={`/blog/${post.id}/`}>Read more</a>
+
+            <FormattedDate date={post.data.pubDate} />
+          </p>
         </article>
       ))
     }
@@ -26,23 +34,31 @@ const posts = (await getCollection('blog')).sort(
 </div>
 
 <style>
-  .index-posts {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 2em;
+  .index-post {
+    margin-bottom: 5em;
   }
   .blog-index {
 		background: white;
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
 	}
+  .blog-index a {
+		text-decoration: none;
+  }
   .index-section {
 		width: 720px;
     max-width: calc(100% - 2em);
     margin: auto;
     padding: 3em 1em;
   }
-  .post-date {
-    flex: 0 0 6em;
+  .post-meta {
+    color: #999;
+    display: flex;
+    justify-content: space-between;
+  }
+  .post-meta a {
+    color: #555;
+  }
+  .post-description {
+    text-align: start;
   }
 </style>
