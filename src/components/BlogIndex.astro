@@ -7,24 +7,42 @@ const posts = (await getCollection('blog')).sort(
 );
 ---
 
-<section>
-  {
-    posts.map((post) => (
-      <article class="index-posts">
-        <a href={`/blog/${post.id}/`}>
-          <h4 class="post-title">{post.data.title}</h4>
-        </a>
-        <p class="post-date">
-          <FormattedDate date={post.data.pubDate} />
-        </p>
-      </article>
-    ))
-  }
-</section>
+<div class="blog-index">
+  <section class="index-section">
+    {
+      posts.map((post) => (
+        <article class="index-posts">
+          <p class="post-date">
+            <FormattedDate date={post.data.pubDate} />
+          </p>
+
+          <a href={`/blog/${post.id}/`}>
+            <h5 class="post-title">{post.data.title}</h5>
+          </a>
+        </article>
+      ))
+    }
+  </section>
+</div>
 
 <style>
   .index-posts {
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
+    align-items: center;
+    gap: 2em;
+  }
+  .blog-index {
+		background: white;
+		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+	}
+  .index-section {
+		width: 720px;
+    max-width: calc(100% - 2em);
+    margin: auto;
+    padding: 3em 1em;
+  }
+  .post-date {
+    flex: 0 0 6em;
   }
 </style>
