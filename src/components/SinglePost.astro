@@ -4,14 +4,14 @@ import type { CollectionEntry } from 'astro:content';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, id } = Astro.props;
 ---
 
 <p class="text-base font-semibold leading-7 text-indigo-600">
   {pubDate.toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" }).replace(",", "")}
 </p>
 
-<a href="#">
+<a href={`/blog/${id}/`}>
   <h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
     {title}
   </h1>
