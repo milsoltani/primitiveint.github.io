@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro"
 import { getCollection } from 'astro:content';
 import { render } from 'astro:content';
 import SinglePost from "../components/SinglePost.astro";
+import Pagination from "../components/Pagination.astro";
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -18,17 +19,17 @@ const renderedPosts = await Promise.all(
 
 <Layout>
   {
-    renderedPosts.map((post) => (
-      <SinglePost 
-        id={post.id}
-        title={post.data.title}
-        description={post.data.description}
-        pubDate={post.data.pubDate}
-        updatedDate={post.data.updatedDate}
-        heroImage={post.data.heroImage}
-      >
-        <post.RenderedContent />
-      </SinglePost>
-    ))
+    <SinglePost 
+      id={renderedPosts[0].id}
+      title={renderedPosts[0].data.title}
+      description={renderedPosts[0].data.description}
+      pubDate={renderedPosts[0].data.pubDate}
+      updatedDate={renderedPosts[0].data.updatedDate}
+      heroImage={renderedPosts[0].data.heroImage}
+    >
+      <renderedPosts[0].RenderedContent />
+    </SinglePost>
   }
+
+  <Pagination posts={renderedPosts.slice(1)} />
 </Layout>
