@@ -8,7 +8,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
 <p class="text-base font-semibold leading-7 text-indigo-600">
-  {pubDate}
+  {pubDate.toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" }).replace(",", "")}
 </p>
 
 <a href="#">
