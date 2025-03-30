@@ -38,7 +38,7 @@ Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sap
 
 ### Output
 
-![blog placeholder](/blog-placeholder-about.jpg)
+![blog placeholder](/https://images.pexels.com/photos/15499499/pexels-photo-15499499/free-photo-of-fake-pack-of-goats.jpeg?auto=compress&cs=tinysrgb&w=1200&lazy=load)
 
 ## Blockquotes
 
