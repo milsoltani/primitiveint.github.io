@@ -5,6 +5,6 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'http://primitiveint.github.io',
+	site: 'https://primitiveint.github.io',
 	integrations: [mdx(), sitemap()],
 });
