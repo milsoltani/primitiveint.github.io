@@ -1,7 +1,33 @@
 ---
 import Layout from "../layouts/Layout.astro"
+import { getCollection } from 'astro:content';
+import { render } from 'astro:content';
+import SinglePost from "../components/SinglePost.astro";
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const renderedPosts = await Promise.all(
+  posts.map(async (post) => {
+    const { Content } = await render(post);
+    return {...post, RenderedContent: Content};
+  })
+)
 ---
 
 <Layout>
-  aaa
+  {
+    renderedPosts.map((post) => (
+      <SinglePost 
+        title={post.data.title}
+        description={post.data.description}
+        pubDate={post.data.pubDate}
+        updatedDate={post.data.updatedDate}
+        heroImage={post.data.heroImage}
+      >
+        <post.RenderedContent />
+      </SinglePost>
+    ))
+  }
 </Layout>
