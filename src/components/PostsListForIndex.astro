@@ -7,11 +7,11 @@ const posts = (await getCollection('blog')).sort(
 );
 ---
 
-<div class="blog-index">
-  <section class="index-section">
+<div class="posts-container">
+  <section>
     {
       posts.map((post) => (
-        <article class="index-post">
+        <article>
           <a href={`/blog/${post.id}/`}>
             <h4 class="post-title">{post.data.title}</h4>
           </a>
@@ -23,8 +23,6 @@ const posts = (await getCollection('blog')).sort(
           </p>
 
           <p class="post-meta">
-            <a href={`/blog/${post.id}/`}>Read more</a>
-
             <FormattedDate date={post.data.pubDate} />
           </p>
         </article>
@@ -34,31 +32,29 @@ const posts = (await getCollection('blog')).sort(
 </div>
 
 <style>
-  .index-post {
-    margin-bottom: 5em;
-  }
-  .blog-index {
+  .posts-container {
 		background: white;
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
 	}
-  .blog-index a {
+  .posts-container a {
 		text-decoration: none;
   }
-  .index-section {
+  .posts-container section {
 		width: 720px;
     max-width: calc(100% - 2em);
     margin: auto;
     padding: 3em 1em;
   }
+  .post-description {
+    text-align: start;
+  }
   .post-meta {
     color: #999;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 4em;
   }
   .post-meta a {
     color: #555;
-  }
-  .post-description {
-    text-align: start;
   }
 </style>
