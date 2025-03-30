@@ -1,0 +1,23 @@
+---
+import "../styles/global.css";
+import { SITE_TITLE } from "../consts";
+import Header from "../components/Header.astro";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{SITE_TITLE}</title>
+</head>
+<body>
+  <Header />
+
+  <div class="bg-white px-6 py-32 lg:px-8">
+    <div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+      <slot />
+    </div>
+  </div>
+</body>
+</html>
