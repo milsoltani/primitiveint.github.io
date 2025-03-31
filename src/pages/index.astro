@@ -31,7 +31,7 @@ const renderedPosts = await Promise.all(
     </SinglePost>
   }
 
-  {renderedPosts.length > 0 && <Pagination posts={renderedPosts.slice(1)} />}
+  {renderedPosts.length > 1 && <Pagination posts={renderedPosts.slice(1)} />}
 
   {renderedPosts.length === 0 && "So Empty...!"}
 </Layout>
